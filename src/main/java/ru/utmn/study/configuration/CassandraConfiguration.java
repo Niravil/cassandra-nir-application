@@ -7,6 +7,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Конфигурация подключения к БД Datastax Astra Cassandra
+ *
+ * @author vasilev
+ */
 @Slf4j
 @Configuration
 public class CassandraConfiguration {

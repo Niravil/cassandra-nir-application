@@ -1,5 +1,6 @@
 package ru.utmn.study.service;
 
+import com.datastax.oss.driver.api.core.PagingIterable;
 import java.text.MessageFormat;
 import java.util.Optional;
 import java.util.UUID;
@@ -12,9 +13,14 @@ import ru.utmn.study.jpa.dao.YoutubeDataSetInfoDao;
 import ru.utmn.study.jpa.entity.YoutubeDatasetInfo;
 import ru.utmn.study.mapper.YoutubeDatasetInfoMapper;
 
+/**
+ * Служба для взаимодействия DAO и контроллера
+ *
+ * @author vasilev
+ */
 @Service
 @AllArgsConstructor(onConstructor_ = @Autowired)
-public class NirService {
+public class YoutubeDatasetInforService {
 
   private final YoutubeDataSetInfoDao dao;
 

@@ -11,6 +11,11 @@ import ru.utmn.study.jpa.dao.YoutubeDataSetInfoDao;
 import ru.utmn.study.jpa.dao.YoutubeDataSetInfoEntityMapper;
 import ru.utmn.study.jpa.dao.YoutubeDataSetInfoEntityMapperBuilder;
 
+/**
+ * Конфигурация мапперов из результата обращения к БД в сущность таблицы
+ *
+ * @author vasilev
+ */
 @Slf4j
 @Configuration
 public class MapperConfiguration {
