@@ -6,11 +6,11 @@ import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.utmn.study.dto.YoutubeDatasetInfoDto;
+import ru.utmn.study.dto.WordsDictionaryDto;
 import ru.utmn.study.exception.ResourceNotFoundException;
-import ru.utmn.study.jpa.dao.YoutubeDataSetInfoDao;
-import ru.utmn.study.jpa.entity.YoutubeDatasetInfo;
-import ru.utmn.study.mapper.YoutubeDatasetInfoMapper;
+import ru.utmn.study.jpa.dao.WordsDictionaryDao;
+import ru.utmn.study.jpa.entity.WordsDictionary;
+import ru.utmn.study.mapper.WordsDictionaryMapper;
 
 /**
  * Служба для взаимодействия DAO и контроллера
@@ -19,25 +19,26 @@ import ru.utmn.study.mapper.YoutubeDatasetInfoMapper;
  */
 @Service
 @AllArgsConstructor(onConstructor_ = @Autowired)
-public class YoutubeDatasetInforService implements
-    NirEntityService<YoutubeDatasetInfoDto> {
+public class WordsDictionaryService implements NirEntityService<WordsDictionaryDto> {
 
-  private final YoutubeDataSetInfoDao dao;
+  private final WordsDictionaryDao dao;
 
-  public Optional<YoutubeDatasetInfoDto> getById(String uuid) {
-    return this.getEntityById(uuid).map(YoutubeDatasetInfoMapper::mapToDto);
+  @Override
+  public Optional<WordsDictionaryDto> getById(String uuid) {
+    return this.getEntityById(uuid).map(WordsDictionaryMapper::mapToDto);
   }
 
-  private Optional<YoutubeDatasetInfo> getEntityById(String uuid) {
+  private Optional<WordsDictionary> getEntityById(String uuid) {
     return dao.findByID(UUID.fromString(uuid));
   }
-
-  public UUID save(YoutubeDatasetInfoDto body) {
-    YoutubeDatasetInfo entity = YoutubeDatasetInfoMapper.mapToEntity(body);
+  @Override
+  public UUID save(WordsDictionaryDto body) {
+    WordsDictionary entity = WordsDictionaryMapper.mapToEntity(body);
     dao.save(entity);
     return entity.getId();
   }
 
+  @Override
   public Boolean delete(String uuid) {
     return dao.delete(this.getEntityById(uuid)
         .orElseThrow(() -> new ResourceNotFoundException(MessageFormat.format(
