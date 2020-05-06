@@ -45,16 +45,16 @@ public class YoutubeDatasetInfoController {
   public ResponseEntity<UUID> addOrUpdateYoutubeDatasetInfo(
       @ApiParam(value = "Тело запроса с необходимыми при публикации полями")
       @RequestBody YoutubeDatasetInfoDto body) {
-    final UUID result = youtubeDatasetInforService.saveVideo(body);
+    final UUID result = youtubeDatasetInforService.save(body);
     return ResponseEntity.ok(result);
   }
 
   @ApiOperation(value = "Удалить данные о видеоролике")
   @DeleteMapping(value = "/videos/{videoTimestamp}")
-  public ResponseEntity YoutubeDatasetInfo(
+  public ResponseEntity deleteYoutubeDatasetInfo(
       @ApiParam(value = "Уникальный идентификатор (таймстамп) видеоролика")
       @PathVariable String videoTimestamp) {
-    youtubeDatasetInforService.deleteVideo(videoTimestamp);
+    youtubeDatasetInforService.delete(videoTimestamp);
     return ResponseEntity.ok().build();
   }
 }
