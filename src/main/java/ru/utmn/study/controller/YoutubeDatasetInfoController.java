@@ -35,7 +35,9 @@ public class YoutubeDatasetInfoController {
   public ResponseEntity<YoutubeDatasetInfoDto> getYoutubeDatasetInfo(
       @ApiParam(value = "Уникальный идентификатор (таймстамп) видеоролика")
       @PathVariable String videoTimestamp) {
-    return youtubeDatasetInforService.getById(videoTimestamp).map(ResponseEntity::ok)
+    return youtubeDatasetInforService
+        .getById(UUID.fromString(videoTimestamp))
+        .map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());
   }
 
@@ -54,7 +56,7 @@ public class YoutubeDatasetInfoController {
   public ResponseEntity deleteYoutubeDatasetInfo(
       @ApiParam(value = "Уникальный идентификатор (таймстамп) видеоролика")
       @PathVariable String videoTimestamp) {
-    youtubeDatasetInforService.delete(videoTimestamp);
+    youtubeDatasetInforService.delete(UUID.fromString(videoTimestamp));
     return ResponseEntity.ok().build();
   }
 }
