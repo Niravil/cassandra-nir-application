@@ -20,16 +20,16 @@ import ru.utmn.study.mapper.YoutubeDatasetInfoMapper;
 @Service
 @AllArgsConstructor(onConstructor_ = @Autowired)
 public class YoutubeDatasetInforService implements
-    NirEntityService<YoutubeDatasetInfoDto> {
+    NirEntityService<YoutubeDatasetInfoDto, UUID> {
 
   private final YoutubeDataSetInfoDao dao;
 
-  public Optional<YoutubeDatasetInfoDto> getById(String uuid) {
+  public Optional<YoutubeDatasetInfoDto> getById(UUID uuid) {
     return this.getEntityById(uuid).map(YoutubeDatasetInfoMapper::mapToDto);
   }
 
-  private Optional<YoutubeDatasetInfo> getEntityById(String uuid) {
-    return dao.findByID(UUID.fromString(uuid));
+  private Optional<YoutubeDatasetInfo> getEntityById(UUID uuid) {
+    return dao.findByID(uuid);
   }
 
   public UUID save(YoutubeDatasetInfoDto body) {
@@ -38,7 +38,7 @@ public class YoutubeDatasetInforService implements
     return entity.getId();
   }
 
-  public Boolean delete(String uuid) {
+  public Boolean delete(UUID uuid) {
     return dao.delete(this.getEntityById(uuid)
         .orElseThrow(() -> new ResourceNotFoundException(MessageFormat.format(
             "Dataset info with id {0} not found", uuid))));

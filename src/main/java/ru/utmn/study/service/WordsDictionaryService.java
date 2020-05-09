@@ -19,17 +19,17 @@ import ru.utmn.study.mapper.WordsDictionaryMapper;
  */
 @Service
 @AllArgsConstructor(onConstructor_ = @Autowired)
-public class WordsDictionaryService implements NirEntityService<WordsDictionaryDto> {
+public class WordsDictionaryService implements NirEntityService<WordsDictionaryDto, UUID> {
 
   private final WordsDictionaryDao dao;
 
   @Override
-  public Optional<WordsDictionaryDto> getById(String uuid) {
+  public Optional<WordsDictionaryDto> getById(UUID uuid) {
     return this.getEntityById(uuid).map(WordsDictionaryMapper::mapToDto);
   }
 
-  private Optional<WordsDictionary> getEntityById(String uuid) {
-    return dao.findByID(UUID.fromString(uuid));
+  private Optional<WordsDictionary> getEntityById(UUID uuid) {
+    return dao.findByID(uuid);
   }
   @Override
   public UUID save(WordsDictionaryDto body) {
@@ -39,9 +39,9 @@ public class WordsDictionaryService implements NirEntityService<WordsDictionaryD
   }
 
   @Override
-  public Boolean delete(String uuid) {
+  public Boolean delete(UUID uuid) {
     return dao.delete(this.getEntityById(uuid)
         .orElseThrow(() -> new ResourceNotFoundException(MessageFormat.format(
-            "Dataset info with id {0} not found", uuid))));
+            "Words Dictionary element with id {0} not found", uuid))));
   }
 }

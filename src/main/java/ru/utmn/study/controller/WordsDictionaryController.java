@@ -36,7 +36,7 @@ public class WordsDictionaryController {
   public ResponseEntity<WordsDictionaryDto> getWordDictionary(
       @ApiParam(value = "Уникальный идентификатор элемента словаря")
       @PathVariable String timestamp) {
-    return wordsDictionaryService.getById(timestamp).map(ResponseEntity::ok)
+    return wordsDictionaryService.getById(UUID.fromString(timestamp)).map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());
   }
 
@@ -55,7 +55,7 @@ public class WordsDictionaryController {
   public ResponseEntity deleteWordDictionary(
       @ApiParam(value = "Уникальный идентификатор элемента словаря")
       @PathVariable String timestamp) {
-    wordsDictionaryService.delete(timestamp);
+    wordsDictionaryService.delete(UUID.fromString(timestamp));
     return ResponseEntity.ok().build();
   }
 }
